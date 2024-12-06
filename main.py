@@ -132,7 +132,7 @@ def main():
         laberinto = cargar_laberinto(f.readlines())
         f.close()
 
-        camino = resolver(laberinto, inicial)
+        camino = resolver(laberinto)
 
     print(camino)
 
