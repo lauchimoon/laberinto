@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,8 +13,8 @@ typedef struct Laberinto {
 } Laberinto;
 
 typedef struct Punto {
-    int x;
     int y;
+    int x;
 } Punto;
 
 /* Utils */
@@ -87,8 +88,11 @@ char *avanzar_linea(FILE *f, char *linea)
 void alocar_laberinto(Laberinto *lab)
 {
     lab->tablero = malloc(lab->dimension * sizeof(char *));
-    for (int i = 0; i < lab->dimension; ++i)
+    assert(lab->tablero != NULL);
+    for (int i = 0; i < lab->dimension; ++i) {
         lab->tablero[i] = malloc(lab->dimension * sizeof(char));
+        assert(lab->tablero[i] != NULL);
+    }
 
     for (int fila = 1; fila <= lab->dimension; ++fila) {
         for (int columna = 1; columna <= lab->dimension; ++columna) {
