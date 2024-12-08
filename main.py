@@ -1,4 +1,3 @@
-import sys
 import subprocess
 
 # laberinto_vacio retorna un laberinto de tamaño dimension x dimension
@@ -118,27 +117,10 @@ def resolver(lab: list[list[str]]) -> list[tuple[int, int]] | None:
     return camino[::-1]
 
 def main():
-    if len(sys.argv) < 2:
-        print("uso: python", sys.argv[0], "<laberinto generado>")
-        return
-
-    f = open(sys.argv[1], "r")
-    laberinto = cargar_laberinto(f.readlines())
-    if not laberinto:
-        print("No se pudo cargar el laberinto")
-        return
-    f.close()
-
-    camino = resolver(laberinto)
-    if camino is None:
-        print("No se encontró el punto inicial")
-        return
-
-    # Si no hay una solucion para el laberinto, generamos
-    # uno nuevo con las mismas especificaciones
+    camino = []
     while not camino:
-        f = open(sys.argv[1], "r")
         subprocess.run(["./a.out", "EntradaLaberinto.txt"])
+        f = open("SalidaLaberinto.txt", "r")
         laberinto = cargar_laberinto(f.readlines())
         f.close()
 
