@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 # laberinto_vacio retorna un laberinto de tamaño dimension x dimension
 # con todas las casillas libres
@@ -118,9 +119,10 @@ def resolver(lab: list[list[str]]) -> list[tuple[int, int]] | None:
 
 def main():
     camino = []
+    existe_entrada = os.path.exists("EntradaLaberinto.txt")
 
     try:
-        while not camino:
+        while not camino and existe_entrada:
             subprocess.run(["./a.out", "EntradaLaberinto.txt"])
             f = open("SalidaLaberinto.txt", "r")
             laberinto = cargar_laberinto(f.readlines())
@@ -129,6 +131,10 @@ def main():
             camino = resolver(laberinto)
     except FileNotFoundError:
         print("error: No se encontró el ejecutable que genera el laberinto")
+        return
+
+    if not existe_entrada:
+        print("error: No se encontró el archivo de configuración para el laberinto")
         return
 
     print(camino)
