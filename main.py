@@ -118,13 +118,18 @@ def resolver(lab: list[list[str]]) -> list[tuple[int, int]] | None:
 
 def main():
     camino = []
-    while not camino:
-        subprocess.run(["./a.out", "EntradaLaberinto.txt"])
-        f = open("SalidaLaberinto.txt", "r")
-        laberinto = cargar_laberinto(f.readlines())
-        f.close()
 
-        camino = resolver(laberinto)
+    try:
+        while not camino:
+            subprocess.run(["./a.out", "EntradaLaberinto.txt"])
+            f = open("SalidaLaberinto.txt", "r")
+            laberinto = cargar_laberinto(f.readlines())
+            f.close()
+
+            camino = resolver(laberinto)
+    except FileNotFoundError:
+        print("error: No se encontró el ejecutable que genera el laberinto")
+        return
 
     print(camino)
 

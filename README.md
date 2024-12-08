@@ -24,6 +24,7 @@ posicion inicial
 objetivo
 (y,x)
 ```
+Donde y, x son enteros >= 1 y menores que la dimension especificada
 - El laberinto dado siempre tiene solución.
 - Si el laberinto generado no tiene solución, el programa en Python
 genera uno nuevo con la misma configuración
